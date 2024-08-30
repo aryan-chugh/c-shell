@@ -24,6 +24,6 @@
 int print_file_contents(const char *file_path);
 int take_actions(dir_tree *tree, bool take_action, int *counts, char **first_match, bool isfile);
 int execute_seek(dir_tree *tree, char *cmd);
-int search_directory(dir_tree *tree, char *base_path, char *path_constructed, char *search_name, bool only_files, bool only_dir, int *counts, char **first_match, bool *file_found) {
+int search_directory(dir_tree *tree, char *base_path, char *path_constructed, char *search_name, bool only_files, bool only_dir, int *counts, char **first_match, bool *file_found);
 
 #endif
