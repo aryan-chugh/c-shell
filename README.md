@@ -1,2 +1,0 @@
--- reveal with multiple directories separated by spaces.
--- reveal with files
