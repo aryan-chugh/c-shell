@@ -4,7 +4,7 @@
 #include <signal.h>
 #include <sys/wait.h>
 
-#define CMD_FILE ".fcom"
+#define CMD_FILE "fcom.txt"
 #define ALIAS_FILE ".myshrc"
 
 bg_list *blist;
@@ -30,10 +30,10 @@ char **fetch_commands_from_file(int **indx) {
         exit(EXIT_FAILURE);
     }
 
-    char buffer[256];
+    char buffer[1024];
     int cmd_count = 0;
             
-    char *tmp = (char *) malloc(sizeof(char) * 256);
+    char *tmp = (char *) malloc(sizeof(char) * 1024);
     if(tmp == NULL) {
         fprintf(stderr, RED);
         perror("malloc");
@@ -43,7 +43,7 @@ char **fetch_commands_from_file(int **indx) {
 
     while (fgets(buffer, sizeof(buffer), file) != NULL) { 
         char *ptr = buffer;  
-        cmds[cmd_count] = (char *) malloc(sizeof(char) * 256);
+        cmds[cmd_count] = (char *) malloc(sizeof(char) * 1024);
         if(cmds[cmd_count] == NULL) {
             fprintf(stderr, RED);
             perror("malloc");
@@ -231,7 +231,7 @@ void run_command(char **list, int *codes, log_deque *ldeq, dir_tree* tree, char 
     int ppid = getpid();
     int status;
 
-    char *command = (char *) malloc(sizeof(char) * 1024);
+    char *command = (char *) malloc(sizeof(char) * 4096);
     if(command == NULL) {
         fprintf(stderr, RED);
         perror("malloc");
@@ -239,7 +239,7 @@ void run_command(char **list, int *codes, log_deque *ldeq, dir_tree* tree, char 
         return;
     }
 
-    char *cmd_wo = (char *) malloc(sizeof(char) * 1024);
+    char *cmd_wo = (char *) malloc(sizeof(char) * 4096);
     if(cmd_wo == NULL) {
         fprintf(stderr, RED);
         perror("malloc");
@@ -247,7 +247,7 @@ void run_command(char **list, int *codes, log_deque *ldeq, dir_tree* tree, char 
         return;
     }
     
-    char *cmd2 = (char *) malloc(sizeof(char) * 1024);
+    char *cmd2 = (char *) malloc(sizeof(char) * 4096);
     if(cmd2 == NULL) {
         fprintf(stderr, RED);
         perror("malloc");
@@ -340,7 +340,7 @@ void run_command(char **list, int *codes, log_deque *ldeq, dir_tree* tree, char 
 
             int measure = (int) elapsed_time;
             if(measure > 2) {
-                f_process[f_count] = (char *) malloc(sizeof(char) * 256);
+                f_process[f_count] = (char *) malloc(sizeof(char) * 1024);
                 strcpy(f_process[f_count], command);
                 f_times[f_count] = measure;
                 f_count ++;
@@ -392,14 +392,14 @@ bool process_commands(char **list, int *codes, dir_tree *tree, log_deque *ldeq, 
 
     bool should_add_to_log = true;
     while(t[c] != NULL) {
-        char *command = (char *) malloc(sizeof(char) * 1024);
+        char *command = (char *) malloc(sizeof(char) * 4096);
         if(command == NULL) {
             fprintf(stderr, RED);
             perror("malloc");
             fprintf(stderr, WHITE);
             return true;
         }
-        char *tok = (char *) malloc(sizeof(char) * 1024);
+        char *tok = (char *) malloc(sizeof(char) * 4096);
         if(tok == NULL) {
             fprintf(stderr, RED);
             perror("malloc");
@@ -444,7 +444,7 @@ char *print_exceeds() {
     }
 
     // Start with a reasonably large buffer
-    size_t buffer_size = 1024;
+    size_t buffer_size = 4096;
     char *to_print = (char *)malloc(buffer_size);
     if (to_print == NULL) {
         fprintf(stderr, RED);
@@ -555,7 +555,10 @@ int main() {
             user_input[0] = '\0';
         }
 
-        if(strcmp(user_input, "q") == 0) break;
+        if(strcmp(user_input, "q") == 0) {
+            free(user_input);
+            break;
+        }
 
         // printf("level - 1 : %s\n", user_input);
         bool hist = process_commands(cmds, cmd_codes, d_tree, l_deque, user_input);

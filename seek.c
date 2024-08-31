@@ -10,7 +10,7 @@ int print_file_contents(const char *file_path) {
         return EXIT_FAILURE;
     }
 
-    char buffer[1024];
+    char buffer[4096];
     while (fgets(buffer, sizeof(buffer), file) != NULL) {
         printf("%s", buffer);
         fflush(stdout);
@@ -48,10 +48,10 @@ int search_directory(dir_tree *tree, char *base_path, char *path_constructed, ch
         }
 
         // Construct the path to the current entry
-        char path[1024];
+        char path[4096];
         snprintf(path, sizeof(path), "%s/%s", base_path, entry->d_name);
 
-        char rel_path[1024];
+        char rel_path[4096];
         snprintf(rel_path, sizeof(rel_path), "%s/%s", path_constructed, entry->d_name);
 
         struct stat statbuf;
@@ -125,7 +125,7 @@ int execute_seek(dir_tree *tree, char *cmd) {
     bool only_dir = false;
     bool is_action = false;
     
-    char **paths = (char **) malloc(sizeof(char *) * 100);
+    char **paths = (char **) malloc(sizeof(char *) * 256);
     if(paths == NULL) {
         fprintf(stderr, RED);
         perror("malloc");
@@ -136,7 +136,7 @@ int execute_seek(dir_tree *tree, char *cmd) {
     int paths_specified = 0;
 
     bool is_search_path = false ;
-    char *search_path = (char *) malloc(sizeof(char) * 1024);
+    char *search_path = (char *) malloc(sizeof(char) * 4096);
 
     if(search_path == NULL) {
         fprintf(stderr, RED);
@@ -203,7 +203,7 @@ int execute_seek(dir_tree *tree, char *cmd) {
         substr = strtok(NULL, " ");
     }
 
-    char *first_match = (char *) malloc(sizeof(char) * 1024);
+    char *first_match = (char *) malloc(sizeof(char) * 4096);
     if(first_match == NULL) {
         fprintf(stderr, RED);
         perror("malloc");

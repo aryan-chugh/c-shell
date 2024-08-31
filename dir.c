@@ -9,7 +9,7 @@ dir_node *create_node(char *name, bool ishome) {
         fprintf(stderr, WHITE);
         return NULL;
     }
-    tmp->name = (char *) malloc(sizeof(char) * 256);
+    tmp->name = (char *) malloc(sizeof(char) * 4096);
     if(tmp->name == NULL) {
         fprintf(stderr, RED);
         perror("malloc");
@@ -21,14 +21,14 @@ dir_node *create_node(char *name, bool ishome) {
 
     tmp->is_home = ishome;
     tmp->num_children = 0;
-    tmp->children = (dir_node **) malloc(sizeof(dir_node *) * 256); // 256 children capacity
+    tmp->children = (dir_node **) malloc(sizeof(dir_node *) * 512); // 512 children capacity
     tmp->parent = NULL;
 
     return tmp;
 }
 
 void setup_tree(char *home_path, dir_tree *tree) {
-    char **components = (char **) malloc(sizeof(char *) * 256); // support 256 directory levels.
+    char **components = (char **) malloc(sizeof(char *) * 512); // support 512 directory levels.
     if(components == NULL) {
         fprintf(stderr, RED);
         perror("malloc");
@@ -97,7 +97,7 @@ void init_cwd(dir_tree *tree) {
 }
 
 char *get_complete_path(dir_tree *tree) {
-    char **components = (char **) malloc(sizeof(char *) * 256);
+    char **components = (char **) malloc(sizeof(char *) * 512);
     if(components == NULL){
         fprintf(stderr, RED);
         perror("malloc");
@@ -142,7 +142,7 @@ char *get_complete_path(dir_tree *tree) {
 }
 
 char *get_curr_path(dir_tree *tree) {
-    char **components = (char **) malloc(sizeof(char *) * 256);
+    char **components = (char **) malloc(sizeof(char *) * 512);
     if(components == NULL){
         fprintf(stderr, RED);
         perror("malloc");
@@ -158,7 +158,7 @@ char *get_curr_path(dir_tree *tree) {
             components[comps++] = "~";
             break;
         }
-        components[comps] = (char *) malloc(sizeof(char) * 1024);
+        components[comps] = (char *) malloc(sizeof(char) * 4096);
         if(components[comps] == NULL){
             fprintf(stderr, RED);
             perror("malloc");

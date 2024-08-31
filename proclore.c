@@ -97,7 +97,7 @@ int get_group(int pid) {
 unsigned long get_virtual_memory(int pid) {
     int flags = O_RDONLY;
 
-    char path[1024];
+    char path[4096];
     snprintf(path, sizeof(path), "/proc/%d/statm", pid);
 
     int fd = open(path, flags);
@@ -108,7 +108,7 @@ unsigned long get_virtual_memory(int pid) {
         fprintf(stderr, WHITE);
         return 0;  // Error handling: return a special value
     } else {
-        char buffer[256];
+        char buffer[4096];
         ssize_t bytes_read = read(fd, buffer, sizeof(buffer) - 1);
         close(fd);  // Close the file descriptor as soon as we're done with it
 

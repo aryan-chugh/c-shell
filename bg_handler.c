@@ -19,7 +19,7 @@ void add_bg_process(bg_list *lst, int pid, char *proc_name) {
         printf(RED "Error : Couldn't allocate the required memory!\n" WHITE);
         return;
     }
-    tmp -> name = (char *) malloc(sizeof(char) * 256);
+    tmp -> name = (char *) malloc(sizeof(char) * 4096);
     if(tmp -> name == NULL) {
         printf(RED "Error : Couldn't allocate the required memory!\n" WHITE);
         return;

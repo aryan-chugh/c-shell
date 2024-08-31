@@ -26,7 +26,7 @@ log_deque *create_deq() {
     }
 
     for (int i = 0; i < ldeq->cap; i++) {
-        ldeq->arr[i] = (char *) malloc(sizeof(char) * 1024);
+        ldeq->arr[i] = (char *) malloc(sizeof(char) * 4096);
         if(ldeq->arr[i] == NULL) {
             fprintf(stderr, RED);
             perror("malloc");
@@ -60,7 +60,7 @@ void fill_prev(log_deque *ldeq) {
             exit(EXIT_FAILURE);
         } else {
             int count = 0;
-            char *s = (char *) malloc(sizeof(char) * 1024);
+            char *s = (char *) malloc(sizeof(char) * 4096);
             if(s == NULL) {
                 fprintf(stderr, RED);
                 perror("malloc");
@@ -89,7 +89,7 @@ void fill_prev(log_deque *ldeq) {
     }
     close(fd);
 
-    char *tmp = (char *) malloc(sizeof(char) * 256);
+    char *tmp = (char *) malloc(sizeof(char) * 4096);
     if(tmp == NULL) {
         fprintf(stderr, RED);
         perror("malloc");

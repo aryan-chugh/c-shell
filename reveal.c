@@ -209,7 +209,7 @@ int show_file(char *path, int tags) {
         if(tags & 1 == 1) 
             return print_file_info(path, &path_stat);
         else {
-            char *tempor = (char *) malloc(sizeof(char) * 1024);
+            char *tempor = (char *) malloc(sizeof(char) * 4096);
             if(tempor == NULL) {
                 fprintf(stderr, RED);
                 perror("malloc");
@@ -252,7 +252,7 @@ int execute_reveal(dir_tree *tree, char *cmd) {
     int ext_stat = EXIT_SUCCESS;
     int flags = 0;
 
-    char **paths = (char **) malloc(sizeof(char *) * 100);
+    char **paths = (char **) malloc(sizeof(char *) * 256);
     if(paths == NULL) {
         fprintf(stderr, RED);
         perror("malloc");
