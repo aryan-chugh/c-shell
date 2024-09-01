@@ -96,8 +96,6 @@ void update_directories(char *new_dir, int prev_update) {
         if(current_dir == NULL) {
             exit(EXIT_FAILURE);
         }
-
-        printf("%s %s\n", new_dir, current_dir);
         write_to_file(PREVIOUS_DIR_FILE, current_dir);
     }
     write_to_file(CURRENT_DIR_FILE, new_dir);

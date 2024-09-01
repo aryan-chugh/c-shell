@@ -208,6 +208,9 @@ void printBuffer(){
     while(bp != NULL) {
         if(bp -> status != 0) {
             removepids[count ++] = bp -> pid;
+            if(strlen(bp->name) == 0) {
+                strcpy(bp -> name, "(empty)");
+            }
             if(bp -> status == 1) {
                 printf(BOLD "%s exited normally (%d)\n" RESET, bp->name, bp->pid);
             }else if(bp -> status == 2) {

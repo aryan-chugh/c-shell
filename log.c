@@ -281,6 +281,12 @@ int execute_log(char *cmd, log_deque* ldeq) {
             }
 
             id = atoi(tok);
+            if(id <= 0) {
+                fprintf(stderr, RED);
+                perror("Error: invalid index");
+                fprintf(stderr, WHITE);
+                return -1;
+            }
             return id; // success
         } else {
             fprintf(stderr, RED);
