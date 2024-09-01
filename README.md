@@ -1,12 +1,3 @@
-## Limits
-Max Limits :
-- filenames : 256 bytes 
-- paths : 512 bytes
-- command_lengths : 1024 bytes
-- user input : 4096 bytes
-- processes : 128 processes
-- commands : 256 commands
-
 ## Assumptions
 1. log command will take in and store non-empty non-valid commands too.
 2. the input is parsed using strtok which rarely tends to tokenize incorrectly. In such cases an Error output is shown.
