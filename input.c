@@ -1,8 +1,4 @@
 #include "input.h"
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
 
 char *minimise_spaces(const char *inp) {
     size_t len = strlen(inp);

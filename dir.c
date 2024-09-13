@@ -255,6 +255,10 @@ char* get_complete_path() {
     return read_from_file(0);
 }
 
+char *get_home_path() {
+    return read_from_file(2);
+}
+
 char* get_curr_path() {
     char *current_dir = get_complete_path();
     char *shell_home = read_from_file(2);
@@ -334,7 +338,7 @@ char* convert_to_absolute(char *path) {
 }
 
 
-int hop_to_paths(int argc, char *argv[]) {
+int hop_to_paths(int argc, char *argv[], bool should_print) {
     if (argc == 0) {
         hop_to_home(1);
         return 0;
@@ -375,7 +379,13 @@ int hop_to_paths(int argc, char *argv[]) {
         // char *new_dir = getcwd(NULL, 0);
         // printf("%s\n", new_dir);
         // update_directories(new_dir, 0);
+
+        if(should_print) {
+            printf("%s\n", get_complete_path());
+            fflush(stdout);
+        }
         write_to_file(PREVIOUS_DIR_FILE, temp_curr);
+
 
         // fprintf(stderr, "reached\n");
         // free(new_dir);
@@ -400,8 +410,6 @@ int execute_hop(char *cmd) {
         tok = strtok(NULL, " ");
     }
 
-    int ret_ = hop_to_paths(args, argv);
-    printf("%s\n", get_complete_path());
-    fflush(stdout);
+    int ret_ = hop_to_paths(args, argv, true);
     return ret_;
 }

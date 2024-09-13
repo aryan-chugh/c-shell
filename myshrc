@@ -1,0 +1,13 @@
+reveall rl = reveal -l
+
+func mkhop () {
+    mkdir "$1"
+    hop "$1"
+}
+func hop_seek () 
+{
+    hop "$1"
+    seek "$2"
+}
+
+home = hop   ~

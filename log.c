@@ -1,11 +1,4 @@
 #include "log.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
 
 char *dir_root;
 
@@ -260,11 +253,13 @@ char *return_nth_recent(log_deque *ldeq, int n) {
 }
 
 int execute_log(char *cmd, log_deque* ldeq) {
+    cmd[strlen(cmd) - 1] = '\0';
     if (strlen(cmd) == 0) {
         fill_prev(ldeq);
         show_log(ldeq);
         return 0; // success
     } else {
+        // printf("%d %s\n", strcmp("purge", cmd), cmd);
         if (strcmp("purge", cmd) == 0) {
             purge(ldeq);
             return 0; // success

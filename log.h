@@ -1,20 +1,8 @@
 #ifndef LOG_H
 #define LOG_H
 
-#include <stdbool.h>
+#include "headers.h"
 #include "dir.h"
-
-#define BUFFER_SIZE 4096
-
-#define RESET       "\033[0m"
-#define RED         "\033[31m"
-#define GREEN       "\033[32m"
-#define YELLOW      "\033[33m"
-#define BLUE        "\033[34m"
-#define MAGENTA     "\033[35m"
-#define CYAN        "\033[36m"
-#define WHITE       "\033[37m"
-#define BOLD        "\033[1m"
 
 typedef struct log_deque {
     int cap;

@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "bg_handler.h"
 
 bg_list *initialize_bg() {
@@ -11,7 +8,7 @@ bg_list *initialize_bg() {
     return lst; 
 }
 
-void add_bg_process(bg_list *lst, int pid, char *proc_name) {
+void add_bg_process(bg_list *lst, int pid, char *proc_name, char *command_name) {
     bg_process *head = lst -> head_lst;
     
     bg_process *tmp = (bg_process *) malloc(sizeof(bg_process));
@@ -24,13 +21,19 @@ void add_bg_process(bg_list *lst, int pid, char *proc_name) {
         printf(RED "Error : Couldn't allocate the required memory!\n" WHITE);
         return;
     }
+
+    tmp -> command_name = (char *) malloc(sizeof(char) * 4096);
+    if(tmp -> command_name == NULL) {
+        printf(RED "Error : Couldn't allocate the required memory!\n" WHITE);
+        return;
+    }
     tmp -> pid = pid;
     tmp -> status = 0;
     tmp -> next = NULL;
     tmp -> prev = NULL;
 
     strcpy(tmp -> name, proc_name);
-        
+    strcpy(tmp -> command_name, command_name);
     if(head == NULL) {
         lst -> num = lst -> num + 1;
         lst -> head_lst = tmp;
@@ -64,6 +67,7 @@ void remove_bg_process(bg_list *lst, int pid) {
                 lst -> head_lst = head -> next;
             }
 
+            free(head -> command_name);
             free(head -> name);
             free(head);
             lst -> num = lst -> num - 1;
@@ -72,6 +76,25 @@ void remove_bg_process(bg_list *lst, int pid) {
         }
         head = head -> next;
     }
+}
+
+void free_bg_list(bg_list *lst) {
+    bg_process *bp = lst->head_lst;
+    bg_process *tmp;
+
+    while (bp != NULL) {
+        tmp = bp;
+        bp = bp->next;
+
+        free(tmp->command_name);  
+        free(tmp->name);        
+        free(tmp);
+    }
+
+    lst->head_lst = NULL;
+    lst->num = 0;
+
+    free(lst);
 }
 
 char *get_name(bg_list *lst, int pid) {
@@ -90,7 +113,9 @@ bg_process *get_process(bg_list *lst, int pid) {
     bg_process *head = lst -> head_lst;
     
     while(head != NULL) {
+        // printf("%d\n", head->pid);
         if(head -> pid == pid) {
+            // printf("yes\n");
             return head;
         }
         head = head -> next;

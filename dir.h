@@ -1,25 +1,8 @@
 #ifndef DIR_TREE_H
 #define DIR_TREE_H
 
-#include <stdbool.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <dirent.h>
-#include <sys/types.h>
-#include <fcntl.h>
-
-#define BUFFER_SIZE 4096
-#define RESET       "\033[0m"
-#define RED         "\033[31m"
-#define GREEN       "\033[32m"
-#define YELLOW      "\033[33m"
-#define BLUE        "\033[34m"
-#define MAGENTA     "\033[35m"
-#define CYAN        "\033[36m"
-#define WHITE       "\033[37m"
-#define BOLD        "\033[1m"
+#include "headers.h"
+#include "dir.h"
 
 // Definition of the dir_node structure
 typedef struct dir_node {
@@ -52,9 +35,10 @@ void hop_to_root(int should_update);
 void hop_to_folder(char *folder, int should_update);
 void hop_to_prev(int should_update);
 void hop_to_cur();
-int hop_to_paths(int argc, char *argv[]);
+int hop_to_paths(int argc, char *argv[], bool should_print);
 char* convert_to_absolute(char *path);
 int execute_hop(char *cmd);
 void set_current_directory() ;
+char *get_home_path();
 
 #endif // DIR_TREE_H

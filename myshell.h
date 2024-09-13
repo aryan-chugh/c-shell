@@ -1,32 +1,28 @@
 #ifndef MY_SHELL
 #define MY_SHELL
 
-#include "dir.h"
-#include "info.h"
 #include "input.h"
+#include "info.h"
+#include "bg_handler.h"
 #include "log.h"
+#include "dir.h"
 #include "reveal.h"
 #include "proclore.h"
 #include "seek.h"
-#include "bg_handler.h"
+#include "pipes.h"
+#include "activities.h"
+#include "ping.h"
+#include "fg.h"
+#include "iman.h"
+#include "myshrc_parser.h"
+#include "neonate.h"
+#include "handlers.h"
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <time.h>
-#include <unistd.h>
-#include <sys/wait.h>
-#include <sys/times.h>
+#include "headers.h"
+// Function prototypes
 
-#include <stdbool.h>
-
-#define RESET       "\033[0m"
-#define RED         "\033[31m"
-#define GREEN       "\033[32m"
-#define YELLOW      "\033[33m"
-#define BLUE        "\033[34m"
-#define MAGENTA     "\033[35m"
-#define CYAN        "\033[36m"
-#define WHITE       "\033[37m"
-#define BOLD        "\033[1m"
+void run_command(char **list, int *codes, log_deque *ldeq, char *cmd, bool bg);
+bool process_commands(char **list, int *codes, log_deque *ldeq, char *s);
+void print_prompt();
 
 #endif

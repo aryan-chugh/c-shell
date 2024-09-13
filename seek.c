@@ -106,7 +106,7 @@ int take_actions(bool take_action, int *counts, char **first_match, bool isfile)
                 // here change the current working directory by calling hop to path
                 char *args[1];
                 args[0] = (*first_match);
-                hop_to_paths(1, args);
+                hop_to_paths(1, args, false) ;
 
                 return EXIT_SUCCESS;
             }else {
@@ -164,7 +164,7 @@ int execute_seek(char *cmd) {
                 if(substr[i] == 'f') {
                     if(only_dir) {
                         fprintf(stderr, RED);
-                        fprintf(stderr, "Error : invalid command.\n");
+                        fprintf(stderr, "Error : invalid flags passed.\n");
                         fprintf(stderr, WHITE);
                         return EXIT_FAILURE;
                     }
@@ -172,7 +172,7 @@ int execute_seek(char *cmd) {
                 }else if(substr[i] == 'd') {
                     if(only_files) {
                         fprintf(stderr, RED);
-                        fprintf(stderr, "Error : invalid command.\n");
+                        fprintf(stderr, "Error : invalid flags passed.\n");
                         fprintf(stderr, WHITE);
                         return EXIT_FAILURE;
                     }

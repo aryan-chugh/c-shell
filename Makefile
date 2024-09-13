@@ -5,7 +5,7 @@ CC = gcc
 
 
 # Source files
-SRCS = myshell.c log.c dir.c bg_handler.c info.c input.c proclore.c reveal.c seek.c
+SRCS = myshell.c log.c dir.c bg_handler.c info.c input.c proclore.c reveal.c seek.c pipes.c activities.c ping.c fg.c iman.c myshrc_parser.c neonate.c handlers.c
 
 # Output executable (default name 'a.out')
 TARGET = a.out
