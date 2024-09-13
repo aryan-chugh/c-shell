@@ -29,12 +29,4 @@
 16. With & the piping will take the last process in the pipe and put it in the background.
 
 
-------------------
-updates : 
---- necessary changes to proclore
---- piping implemented.
---- background process handling changed.
-
-----------------------
-
 
