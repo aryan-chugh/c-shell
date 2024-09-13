@@ -23,7 +23,8 @@
     - Now, if the time interval is relatively short then, there may arise some file opening problem for the newest created file, it happens for 1-2 attempts but may vary depending on how short the time interval is. Then it correctly reads and outputs.
 
     Update : 
-    - Used this in my logic, if there is a file created and it cannot be read then it has to be corresponding to the most recently created process... 
+    - Used this in my logic, if there is a file created and it cannot be read then it has to be corresponding to the most recently created process...
+14. `activities` will give all states as Running except T which will be reported as Stopped.
 
 ------------------
 updates : 
@@ -33,12 +34,5 @@ updates :
 
 
 ----------------------
-handle the foreground -> background on ctrl + z
-handle the ctrl + d
-
-stty command can be used to check the signal sent 
-
-why is SIGTSTP not working.... (try changing the pgid using the root)
--- handle the print_exceeds on Ctrl + C, Ctrl + D
 
 
