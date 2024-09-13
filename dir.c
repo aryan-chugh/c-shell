@@ -396,7 +396,7 @@ int hop_to_paths(int argc, char *argv[], bool should_print) {
 int execute_hop(char *cmd) {
     char *tok = strtok(cmd, " ");
     int args = 0;
-    char *argv[256];
+    char *argv[4096];
 
     while(tok != NULL) {
         argv[args] = (char *) malloc(sizeof(char) * 4096);
