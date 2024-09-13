@@ -25,13 +25,15 @@
     Update : 
     - Used this in my logic, if there is a file created and it cannot be read then it has to be corresponding to the most recently created process...
 14. `activities` will give all states as Running except T which will be reported as Stopped.
+15. piping is implemented sequentially.
+16. With & the piping will take the last process in the pipe and put it in the background.
+
 
 ------------------
 updates : 
 --- necessary changes to proclore
 --- piping implemented.
 --- background process handling changed.
-
 
 ----------------------
 
