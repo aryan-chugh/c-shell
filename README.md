@@ -1,4 +1,4 @@
-# 🐚 C-Shell - Custom Unix Shell Implementation
+# C-Shell - Custom Unix Shell Implementation
 
 A comprehensive Unix shell implementation written in C that provides enhanced functionality including background process management, piping, command history, file searching, process monitoring, and custom shell scripting capabilities.
 
